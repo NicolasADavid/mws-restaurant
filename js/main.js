@@ -156,27 +156,36 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
 
+  // The overall element
+  const li = document.createElement('li');
+  li.className = "restaraunt-tile"
+
+  // The image
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
-  const name = document.createElement('h1');
+  // Name of restaraunt
+  const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
   li.append(name);
 
+  // Name of neighborhood
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
   li.append(neighborhood);
 
+  // Address
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
   li.append(address);
 
+  // Button
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
+  // Url for restaraunt details
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
 
