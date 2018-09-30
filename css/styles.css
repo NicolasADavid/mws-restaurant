@@ -1,30 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-/* Media queries */
 
-/* @media screen and (min-width: 1px && max-width: 774px) {
-  max-width: 400px;
-  margin: auto;
-} */
-
-@media screen and (min-width: 775px) {
-  #restaurants-list{
-    display: flex;
-    flex-wrap:wrap;
-  }
-}
-
-@media screen and (min-width: 1505px) {
-  #maincontent {
-    max-width: 1505px;
-    margin: auto;
-  }
-
-  .h1 {
-    margin: auto;
-  }
-}
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
@@ -168,7 +145,7 @@ nav h1 a {
   margin: 15px;
   min-height: 380px;
   padding: 10px 30px 25px;
-  width: 270px;
+  width: 250px;
 }
 #restaurants-list .restaurant-img {
   background-color: #ccc;
@@ -281,4 +258,41 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+
+/* Media queries */
+
+/* @media screen and (min-width: 1px && max-width: 774px) {
+  max-width: 400px;
+  margin: auto;
+} */
+@media screen and (min-width: 0px) and (max-width: 775px){
+  #restaurants-list ul {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  #restaurants-list li {
+    width: 100%;
+    margin: 10px 0 0 0;
+    padding: 0px;
+  }
+}
+
+@media screen and (min-width: 775px) {
+  #restaurants-list{
+    display: flex;
+    flex-wrap:wrap;
+  }
+}
+
+@media screen and (min-width: 1505px) {
+  #maincontent {
+    max-width: 1505px;
+    margin: auto;
+  }
+
+  .h1 {
+    margin: auto;
+  }
 }
