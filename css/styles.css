@@ -261,11 +261,6 @@ nav h1 a {
 }
 
 /* Media queries */
-
-/* @media screen and (min-width: 1px && max-width: 774px) {
-  max-width: 400px;
-  margin: auto;
-} */
 @media screen and (min-width: 0px) and (max-width: 775px){
   #restaurants-list ul {
     width: 100%;
