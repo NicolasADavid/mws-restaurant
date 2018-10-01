@@ -8,6 +8,9 @@
   
   <title>Restaurant Reviews</title>
 
+  <!-- Register SW Script -->
+  <script type="application/javascript" charset="utf-8" src="js/register.js"></script>
+
   <!-- Added viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -44,12 +47,20 @@
         <h2>Filter Results</h2>
 
         <!-- Neighborhood filter -->
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+        <select 
+          id="neighborhoods-select"
+          name="neighborhoods"
+          onchange="updateRestaurants()"
+          aria-label="Filter">
           <option value="all">All Neighborhoods</option>
         </select>
 
         <!-- Cuisine type filter -->
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+        <select
+          id="cuisines-select"
+          name="cuisines"
+          onchange="updateRestaurants()"
+          aria-label="Filter">
           <option value="all">All Cuisines</option>
         </select>
 
@@ -75,8 +86,7 @@
   <!-- Main Script -->
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
 
-  <!-- Register SW Script -->
-  <script type="application/javascript" charset="utf-8" src="js/register.js"></script>
+  
 
   <!-- What is this? -->
   <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap"></script> -->
