@@ -197,6 +197,7 @@ createRestaurantHTML = (restaurant) => {
   more.innerHTML = 'View Details';
   // Url for restaraunt details
   more.href = DBHelper.urlForRestaurant(restaurant);
+  more.aria-
   li.append(more)
 
   return li

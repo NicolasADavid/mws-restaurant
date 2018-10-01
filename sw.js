@@ -1,4 +1,4 @@
-var cacheVer = "001";
+var cacheVer = "002";
 
 self.addEventListener("install", event => {
     event.waitUntil(
