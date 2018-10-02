@@ -140,6 +140,7 @@ nav h1 a {
   margin: 0;
   padding: 30px 15px 60px;
   text-align: center;
+  justify-content: center;
 }
 #restaurants-list li {
   background-color: #fff;
@@ -282,7 +283,8 @@ nav h1 a {
     padding: 0px;
   }
   #restaurants-list li {
-    width: 100%;
+    width: 80%;
+    max-width: 100%;
     margin: 10px 0 0 0;
     padding: 0px;
   }
