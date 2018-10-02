@@ -1,4 +1,4 @@
-var cacheVer = "002";
+var cacheVer = "003";
 
 self.addEventListener("install", event => {
     event.waitUntil(
@@ -70,13 +70,4 @@ self.addEventListener('fetch', function(event) {
         })
     )
 
-
-})
-
-self.addEventListener("fetch", event => {
-
-
-    
-
-    
 })
