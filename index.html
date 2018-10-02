@@ -22,9 +22,9 @@
 
     <nav>
 
-      <h1 class="text-centered">
+      <h1 class="text-centered" >
 
-        <a href="/">Restaurant Reviews</a>
+        <a tabindex="0" href="/">Restaurant Reviews</a>
 
       </h1>
 
@@ -48,19 +48,21 @@
 
         <!-- Neighborhood filter -->
         <select 
+          tabindex="0"
           id="neighborhoods-select"
           name="neighborhoods"
           onchange="updateRestaurants()"
-          aria-label="Filter">
+          aria-label="Neighborhood Filter">
           <option value="all">All Neighborhoods</option>
         </select>
 
         <!-- Cuisine type filter -->
         <select
+          tabindex="0"
           id="cuisines-select"
           name="cuisines"
           onchange="updateRestaurants()"
-          aria-label="Filter">
+          aria-label="Cusines Type Filter">
           <option value="all">All Cuisines</option>
         </select>
 
