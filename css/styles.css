@@ -151,8 +151,8 @@ nav h1 a {
   background-color: #ccc;
   display: block;
   margin: 0;
-  min-height: 248px;
-  min-width: 100%;
+  max-height: 100%;
+  max-width: 100%;
 }
 #restaurants-list p {
   margin: 0;
@@ -270,7 +270,7 @@ nav h1 a {
     height: 150px;
   }
   #restaurant-img {
-    max-height: 200px
+    max-height: 150px
   }
   #restaurants-list ul {
     width: 100%;
