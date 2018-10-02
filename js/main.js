@@ -36,6 +36,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
+    option.removeAttribute('tabindex');
     select.append(option);
   });
 }
@@ -179,20 +180,24 @@ createRestaurantHTML = (restaurant) => {
   // Name of restaraunt
   const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
+  name.tabIndex = 2;
   li.append(name);
 
   // Name of neighborhood
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
+  neighborhood.tabIndex = 2;
   li.append(neighborhood);
 
   // Address
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
+  address.tabIndex = 2;
   li.append(address);
 
   // Button
   const more = document.createElement('a');
+  more.tabIndex = 2;
   more.innerHTML = 'View Details';
   // Url for restaraunt details
   more.href = DBHelper.urlForRestaurant(restaurant);

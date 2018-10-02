@@ -105,6 +105,10 @@ nav h1 a {
   background-color: #ccc;
 }
 
+/* .leaflet-pane img{
+  tabindex: -1;
+} */
+
 /* ====================== Restaurant Filtering ====================== */
 #filter-container {
   background-color: #252831;
