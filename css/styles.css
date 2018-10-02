@@ -33,9 +33,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Arial, Helvetica, sans-serif;
   /* margin: 0 0 20px; */
 }
-/* article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-	display: block;
-} */
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
@@ -107,6 +104,7 @@ nav h1 a {
   width: 100%;
   background-color: #ccc;
 }
+
 /* ====================== Restaurant Filtering ====================== */
 #filter-container {
   background-color: #252831;
@@ -201,6 +199,10 @@ nav h1 a {
   line-height: 1.1;
 }
 #restaurant-img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.inside #restaurant-img {
   object-fit: cover;
   width: 100%;
   display: block;
@@ -287,7 +289,7 @@ nav h1 a {
   #map{
     height: 200px;
   }
-  #restaurant-img {
+  .inside #restaurant-img {
     max-height: 300px;
   }
   #restaurants-list{
@@ -304,7 +306,7 @@ nav h1 a {
   #map{
     height: 250px;
   }
-  #restaurant-img {
+  .inside #restaurant-img {
     max-height: 400px;
   }
 }
@@ -313,7 +315,7 @@ nav h1 a {
   #map{
     height: 250px;
   }
-  #restaurant-img {
+  .inside #restaurant-img {
     max-height: 450px;
   }
 }
@@ -323,7 +325,7 @@ nav h1 a {
   #map{
     height: 300px;
   }
-  #restaurant-img {
+  .inside #restaurant-img {
     max-height: 500px;
   }
   #maincontent {
