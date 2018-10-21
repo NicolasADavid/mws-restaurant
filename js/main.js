@@ -17,15 +17,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * Fetch all neighborhoods and set their HTML.
  */
 fetchNeighborhoods = () => {
-  DBHelper.fetchNeighborhoods((error, neighborhoods) => {
-    if (error) { // Got an error
-      console.error(error);
-    } else {
-      self.neighborhoods = neighborhoods;
-      fillNeighborhoodsHTML();
-    }
-  });
+  DBHelper.fetchNeighborhoods()
+  .then((neighborhoods)=>{
+    self.neighborhoods = neighborhoods;
+    fillNeighborhoodsHTML();
+  })
 }
+
 
 /**
  * Set neighborhoods HTML.
@@ -45,14 +43,11 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
  * Fetch all cuisines and set their HTML.
  */
 fetchCuisines = () => {
-  DBHelper.fetchCuisines((error, cuisines) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.cuisines = cuisines;
-      fillCuisinesHTML();
-    }
-  });
+  DBHelper.fetchCuisines()
+  .then((cuisines)=>{
+    self.cuisines = cuisines;
+    fillCuisinesHTML();
+  })
 }
 
 /**
@@ -73,11 +68,14 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  * Initialize leaflet map, called from HTML.
  */
 initMap = () => {
+  
   self.newMap = L.map('map', {
-        center: [40.722216, -73.987501],
-        zoom: 12,
-        scrollWheelZoom: false
-      });
+
+    center: [40.722216, -73.987501],
+    zoom: 12,
+    scrollWheelZoom: false
+  });
+
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
     mapboxToken: 'pk.eyJ1IjoidGVycmlmaWNuaWNvIiwiYSI6ImNqbTl4b2hpODU2eXEzcHA0a21ndjZ3b2cifQ.Pl5wNPr4rbcOlt98awMCBA',
     maxZoom: 18,
@@ -115,13 +113,10 @@ updateRestaurants = () => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
-  DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      resetRestaurants(restaurants);
-      fillRestaurantsHTML();
-    }
+  DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood)
+  .then((restaurants)=>{
+    resetRestaurants(restaurants);
+    fillRestaurantsHTML(restaurants);
   })
 }
 
@@ -146,17 +141,24 @@ resetRestaurants = (restaurants) => {
  * Create all restaurants HTML and add them to the webpage.
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
+
   const ul = document.getElementById('restaurants-list');
-  restaurants.forEach(restaurant => {
-    ul.append(createRestaurantHTML(restaurant));
+
+  restaurants.forEach(async (restaurant) => {
+
+    const li = await createRestaurantHTML(restaurant);
+
+    ul.append(li);
+
   });
+
   addMarkersToMap();
 }
 
 /**
  * Create restaurant HTML.
  */
-createRestaurantHTML = (restaurant) => {
+createRestaurantHTML = async (restaurant) => {
 
   // The overall element
   const li = document.createElement('li');
@@ -166,10 +168,10 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
 
-  const imageURLbase = DBHelper.imageUrlForRestaurant(restaurant);
-  const imgparts = imageURLbase.split(".");
-  const imgurl1x = imgparts[0] + "-800_1x." + imgparts[1];
-  const imgurl2x = imgparts[0] + "-1600_2x." + imgparts[1];
+  const imageURLbase = await DBHelper.imageUrlForRestaurant(restaurant);
+  
+  const imgurl1x = imageURLbase + "-800_1x.jpg";
+  const imgurl2x = imageURLbase + "-1600_2x.jpg";
 
   image.src = imgurl1x;
   image.srcset = `${imgurl1x} 1x, ${imgurl2x} 2x`;

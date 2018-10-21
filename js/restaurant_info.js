@@ -64,7 +64,8 @@ fetchRestaurantFromURL = (callback) => {
     error = 'No restaurant id in URL'
     callback(error, null);
   } else {
-    DBHelper.fetchRestaurantById(id, (error, restaurant) => {
+    DBHelper.fetchRestaurantById(id)
+    .then((restaurant)=>{
       self.restaurant = restaurant;
       if (!restaurant) {
         console.error(error);
@@ -79,7 +80,7 @@ fetchRestaurantFromURL = (callback) => {
 /**
  * Create restaurant HTML and add it to the webpage
  */
-fillRestaurantHTML = (restaurant = self.restaurant) => {
+fillRestaurantHTML = async (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
@@ -89,10 +90,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
 
-  const imageURLbase = DBHelper.imageUrlForRestaurant(restaurant);
-  const imgparts = imageURLbase.split(".");
-  const imgurl1x = imgparts[0] + "-800_1x." + imgparts[1];
-  const imgurl2x = imgparts[0] + "-1600_2x." + imgparts[1];
+  const imageURLbase = await DBHelper.imageUrlForRestaurant(restaurant);
+
+  const imgurl1x = imageURLbase + "-800_1x.jpg";
+  const imgurl2x = imageURLbase + "-1600_2x.jpg";
 
   image.src = imgurl1x;
   image.srcset = `${imgurl1x} 1x, ${imgurl2x} 2x`;
@@ -105,6 +106,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
+  
   // fill reviews
   fillReviewsHTML();
 }
