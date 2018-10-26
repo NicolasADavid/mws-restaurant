@@ -1,6 +1,9 @@
 console.log("Registering SW");
 
 if ("serviceWorker" in navigator) {
+
+    console.log("Hello");
+
     navigator.serviceWorker
     .register("/sw.js")
     .then(reg => {
@@ -9,4 +12,5 @@ if ("serviceWorker" in navigator) {
     .catch(err => {
         console.log("Register error: ", err);
     })
+
 }

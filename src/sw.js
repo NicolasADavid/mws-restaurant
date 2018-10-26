@@ -1,6 +1,11 @@
-var cacheVer = "003";
+// import idb from 'idb';
+
+var cacheVer = "001";
+
 
 self.addEventListener("install", event => {
+
+
     event.waitUntil(
         caches.open(cacheVer).then(cache=>{
             return cache
@@ -9,19 +14,21 @@ self.addEventListener("install", event => {
                 "/index.html",
                 "/restaurant.html",
                 "/css/styles.css",
-                "/data/restaurants.json",
                 "/js/",
                 "/js/dbhelper.js",
                 "/js/main.js",
                 "/js/restaurant_info.js",
-                "/js/register.js",
+                "register.js",
+                "sw.js"
             ])
         })
     )
 })
 
 self.addEventListener('fetch', function(event) {
+
     let cacheRequest = event.request;
+
     let cacheUrlObj = new URL(event.request.url);
 
     if (event.request.url.indexOf("restaurant.html") > -1){
@@ -39,14 +46,19 @@ self.addEventListener('fetch', function(event) {
     }
 
     event.respondWith(
+
         caches.match(cacheRequest)
         .then(response => {
+
             return (
                 response ||
                 fetch(event.request)
                 .then(fetchResponse => {
 
                     return caches.open(cacheVer).then(cache =>{
+
+                        //Check to see if we're offline?
+                        console.log(fetchResponse.clone());
 
                         cache.put(event.request, fetchResponse.clone());
                         return fetchResponse;
@@ -67,6 +79,7 @@ self.addEventListener('fetch', function(event) {
 
                 })
             )
+
         })
     )
 
