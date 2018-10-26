@@ -1,3 +1,4 @@
+
 console.log("Registering SW");
 
 if ("serviceWorker" in navigator) {
