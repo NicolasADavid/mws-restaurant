@@ -1,84 +1,29 @@
-import idb from 'idb';
+var cacheVer = "reviews009";
 
-const dbPromise = {
-    
-    db: idb.open('restaurant-reviews-db', 1, function(upgradeDb) {
-        switch( upgradeDb.oldVersion) {
-            case 0:
-                upgradeDb.createObjectStore('restaurants', {keyPath: 'id' })
-            
-        }
-    }),
-
-    putRestaurants(restaurants) {
-
-        if(!restaurants.push) restaurants = [restaurants];
-
-        return this.db.then(db => {
-
-            const store = db.transaction('restaurants', 'readwrite').objectStore('restaurants');
-
-            Promise.all(restaurants.map(networkRestaurant => {
-
-                return store.get(networkRestaturant.id).then(idbRestaurant => {
-
-                    if (!idbRestaurant || networkRestaurant.updatedAt > idbRestaurant.updatedAt) {
-
-                        return store.put(networkRestaurant);
-
-                    }
-
-                })
-
-            })).then(function () {
-
-                return store.complete;
-
-            });
-
-        });
-
-    },
-
-    getRestaurants(id = undefined){
-
-        return this.db.then(db => {
-
-            const store = db.transaction('restaurants').objectStore('restaurants');
-
-            if (id) return store.get(Number(id));
-
-            return store.getAll();
-
-        })
-
-    }
-
-}
-
-var cacheVer = "001";
+console.log("SW running");
 
 self.addEventListener("install", event => {
 
+    console.log("Installing");
 
     event.waitUntil(
         caches.open(cacheVer).then(cache=>{
             return cache
             .addAll([
-                "/",
                 "/index.html",
                 "/restaurant.html",
                 "/css/styles.css",
-                "/js/",
                 "/js/main.js",
                 "/js/restaurant_info.js",
-                "sw.js"
+                "/manifest.json"
             ])
         })
     )
 })
 
 self.addEventListener('fetch', function(event) {
+
+    console.log("fetching");
 
     let cacheRequest = event.request;
 
@@ -87,6 +32,14 @@ self.addEventListener('fetch', function(event) {
     if (event.request.url.indexOf("restaurant.html") > -1){
 
         const cacheURL = "restaurant.html";
+
+        cacheRequest = new Request(cacheURL);
+
+    }
+
+    if (event.request.url.indexOf("index.html") > -1){
+
+        const cacheURL = "index.html";
 
         cacheRequest = new Request(cacheURL);
 
@@ -115,6 +68,7 @@ self.addEventListener('fetch', function(event) {
                         // console.log(fetchResponse.clone());
 
                         cache.put(event.request, fetchResponse.clone());
+
                         return fetchResponse;
 
                     });
@@ -127,7 +81,7 @@ self.addEventListener('fetch', function(event) {
                     }
 
                     return new Response('Not connected', {
-                        status: 404,
+                        status: 200,
                         statusText: "Not connected to internet"
                     });
 

@@ -1,3 +1,5 @@
+import dbPromise from './dbpromise';
+
 /**
  * Common database helper functions.
  */
@@ -19,10 +21,42 @@ export default class DBHelper {
     
     return fetch('http://localhost:1337/restaurants')
     .then(function(response) {
-      return response.json();
+
+      if(response.status == 200){
+
+        // console.log("Success network call");
+
+        // response.json().then(restaurants => {
+        //   dbPromise.putRestaurants(restaurants);
+        //   return restaurants;
+        // })
+
+        return response.json();
+
+      } else {
+
+        console.log("Request failed. Status: ", response.status, " Trying IDB");
+
+        return dbPromise.getRestaurants().then(idbRestaurants => {
+
+          // console.log("idbRestaurants: ", idbRestaurants);
+
+          if(idbRestaurants.length > 0){
+            return idbRestaurants;
+          } else {
+            throw("No restaurants in storage. Internet connection required.");
+          }
+        })
+
+      }
+
     })
-    .then(function(restaurants){
+    .then(function(restaurants){  
+
+      dbPromise.putRestaurants(restaurants);
+
       return restaurants;
+
     })
     .catch(function(err){
       console.log("fetchRestaurants", err);
@@ -32,25 +66,30 @@ export default class DBHelper {
 
   static fetchRestaurantById(id){
 
-    return DBHelper.fetchRestaurants()
-    .then((restaurants)=>{
+    return fetch(`http://localhost:1337/restaurants/${id}`).then(response =>{
+      
+      if(!response.ok) return Promise.reject("No fetch!!");
 
-      const restaurant = restaurants.find(r => r.id == id);
+      return response.json();
 
-      if (restaurant) { // Got the restaurant
+    }).then((restaurant)=>{
 
-        return restaurant;
+      dbPromise.putRestaurants(restaurant)
 
-      } else { // Restaurant does not exist in the database
-
-        throw "Restaurant does not exist!"
-
-      }
+      return restaurant;
 
     })
     .catch((err)=>{
-      console.log("fetchRestaurantById", err);
+
+      console.log("fetchRestaurantById error: ", err, " trying idb.");
+
+      return dbPromise.getRestaurants(id).then(idbRestaurant => {
+        if(!idbRestaurant) throw "IDB Restaurant not found."
+        return(idbRestaurant);
+      })
+
     })
+
   }
 
   /**

@@ -31,12 +31,12 @@ Object.keys(paths).forEach(prop => {
     let src = [].concat(paths[prop].src);
     src = src.filter(path => path[0] !== "!").map(path => `!${path}`);
     copy.src = copy.src.concat(src);
-})
+});
 
 gulp.task('clean', function(done) {
     log(('Cleaning'));
     return del(['dist/'], done);
-})
+});
 
 gulp.task('js', function () {
     console.log("to do");
@@ -49,9 +49,6 @@ gulp.task('html', function () {
 gulp.task('css', function () {
     console.log("to do");
 });
-
-
-
 
 gulp.task('copy', function() {
     log('Copying..');
@@ -137,6 +134,8 @@ function bundle(b, outputPath) {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(paths.js.dest + outputDir))
         .pipe(browserSync.stream());
+
+        log("done???")
 }
 
 const jsBundles = {};
