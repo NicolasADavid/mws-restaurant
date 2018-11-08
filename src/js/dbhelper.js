@@ -14,6 +14,11 @@ export default class DBHelper {
     return `http://localhost:${port}/data/restaurants.json`;
   }
 
+  static get API_URL(){
+    const port = 1337
+    return `http://localhost:${port}`
+  }
+
   /**
    * Fetch all restaurants.
    */
@@ -194,6 +199,21 @@ export default class DBHelper {
     })
   }
 
+  static fetchRestaurantReviewsByRestaurantId(restaurantId){
+    return fetch(`${DBHelper.API_URL}/reviews/?restaurant_id=${restaurantId}`).then(response => {
+      if (!response.ok) return Promise.reject("Failed to fetch reviews");
+      return response.json();
+    }).then(reviews =>{
+      //Store in IDB
+
+      return reviews;
+    }).catch(error => {
+      //Get reviews from idb
+      console.log(error);
+      return null;
+    })
+  }
+
   /**
    * Restaurant page URL.
    */
@@ -228,17 +248,7 @@ export default class DBHelper {
       })
       marker.addTo(map);
     return marker;
-  } 
-  /* static mapMarkerForRestaurant(restaurant, map) {
-    const marker = new google.maps.Marker({
-      position: restaurant.latlng,
-      title: restaurant.name,
-      url: DBHelper.urlForRestaurant(restaurant),
-      map: map,
-      animation: google.maps.Animation.DROP}
-    );
-    return marker;
-  } */
+  }
 
 }
 

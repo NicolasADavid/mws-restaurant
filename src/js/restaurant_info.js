@@ -1,6 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import DBHelper from './dbhelper';
-import './register.js';
+// import './register.js';
 
 let restaurant;
 var newMap;
@@ -116,7 +116,9 @@ const fillRestaurantHTML = async (restaurant = self.restaurant) => {
   }
   
   // fill reviews
-  fillReviewsHTML();
+  DBHelper.fetchRestaurantReviewsByRestaurantId(restaurant.id)
+  .then(fillReviewsHTML);
+  // fillReviewsHTML();
 }
 
 /**
@@ -179,7 +181,8 @@ const createReviewHTML = (review) => {
 
   const date = document.createElement('p');
   date.tabIndex = 2;
-  date.innerHTML = review.date;
+  // date.innerHTML = review.date;
+  date.innerHTML = new Date(review.createdAt).toLocaleDateString();
   li.appendChild(date);
 
   const rating = document.createElement('p');
