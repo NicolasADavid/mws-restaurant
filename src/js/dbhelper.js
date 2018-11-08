@@ -75,6 +75,8 @@ export default class DBHelper {
       
       if(!response.ok) return Promise.reject("No fetch!!");
 
+      console.log(response);
+
       return response.json();
 
     }).then((restaurant)=>{
@@ -89,8 +91,11 @@ export default class DBHelper {
       console.log("fetchRestaurantById error: ", err, " trying idb.");
 
       return dbPromise.getRestaurants(id).then(idbRestaurant => {
+
         if(!idbRestaurant) throw "IDB Restaurant not found."
+
         return(idbRestaurant);
+
       })
 
     })
@@ -199,19 +204,23 @@ export default class DBHelper {
     })
   }
 
-  static fetchRestaurantReviewsByRestaurantId(restaurantId){
+  static fetchReviewsByRestaurantId(restaurantId){
     return fetch(`${DBHelper.API_URL}/reviews/?restaurant_id=${restaurantId}`).then(response => {
       if (!response.ok) return Promise.reject("Failed to fetch reviews");
       return response.json();
     }).then(reviews =>{
-      //Store in IDB
 
+      //Store in IDB
+      dbPromise.putReviews(reviews);
       return reviews;
     }).catch(error => {
       //Get reviews from idb
       console.log(error);
-      return null;
-    })
+      return dbPromise.getReviews(restaurantId).then(idbReviews => {
+        if(idbReviews.length < 1) return null;
+        return idbReviews;
+      });
+    });
   }
 
   /**

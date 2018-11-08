@@ -116,7 +116,7 @@ const fillRestaurantHTML = async (restaurant = self.restaurant) => {
   }
   
   // fill reviews
-  DBHelper.fetchRestaurantReviewsByRestaurantId(restaurant.id)
+  DBHelper.fetchReviewsByRestaurantId(restaurant.id)
   .then(fillReviewsHTML);
   // fillReviewsHTML();
 }

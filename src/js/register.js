@@ -8,7 +8,7 @@ if ("serviceWorker" in navigator) {
             return;
         }
 
-        console.log(reg);
+        // console.log(reg);
         console.log("Register Success");
     })
     .catch(err => {

@@ -1,6 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import DBHelper from './dbhelper';
-// import './register.js';
+import './register.js';
 
 let restaurants,
   neighborhoods,
@@ -179,6 +179,9 @@ const createRestaurantHTML = async (restaurant) => {
   image.src = imgurl1x;
   image.srcset = `${imgurl1x} 1x, ${imgurl2x} 2x`;
   image.alt = restaurant.name + " restaurant image";
+
+  // image.onerror = "na.jpg";
+  // image.onerror="this.src='na.jpg';"
 
   li.append(image);
 
