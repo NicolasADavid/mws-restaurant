@@ -1,6 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import DBHelper from './dbhelper';
-import './register.js';
+// import './register.js';
 
 let restaurants,
   neighborhoods,
