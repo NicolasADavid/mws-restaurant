@@ -47,7 +47,7 @@ self.addEventListener('fetch', function(event) {
 
     if(cacheUrlObj.hostname !== "localhost") {
 
-        event.request.mode = "no-cors"
+        // event.request.mode = "no-cors"
 
     }
 

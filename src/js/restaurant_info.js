@@ -1,5 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import DBHelper from './dbhelper';
+import favoriteButton from './favorite-button';
 // import './register.js';
 
 let restaurant;
@@ -106,6 +107,11 @@ const fillRestaurantHTML = async (restaurant = self.restaurant) => {
   image.src = imgurl1x;
   image.srcset = `${imgurl1x} 1x, ${imgurl2x} 2x`;
   image.alt = restaurant.name + " restaurant image";
+
+  // Favorite
+  const favoriteContainer = document.getElementById('favorite-container')
+  const favButton = favoriteButton(restaurant);
+  favoriteContainer.append(favButton);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;

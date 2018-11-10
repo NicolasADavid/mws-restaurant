@@ -1,5 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import DBHelper from './dbhelper';
+import favoriteButton from './favorite-button';
 // import './register.js';
 
 let restaurants,
@@ -184,6 +185,10 @@ const createRestaurantHTML = async (restaurant) => {
   // image.onerror="this.src='na.jpg';"
 
   li.append(image);
+
+  // Favorite
+  const favButton = favoriteButton(restaurant);
+  li.append(favButton);
 
   // Name of restaraunt
   const name = document.createElement('h3');

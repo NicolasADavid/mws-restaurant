@@ -268,7 +268,24 @@ nav h1 a {
   color: #666;
 }
 
-/* Media queries */
+/* ====================== Favorite Button  ====================== */
+
+button.fav {
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+}
+
+button.fav[aria-pressed=true] {
+  color: red;
+}
+
+button.fav:hover,
+button.fav:focus {
+  background-color: steelblue;
+}
+
+/* ====================== Media Queries  ====================== */
+
 /* Between 0 and 775 */
 @media screen and (min-width: 0px) and (max-width: 775px){
   #map{

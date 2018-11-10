@@ -12,7 +12,7 @@ const dbPromise = {
         }
     }),
 
-    putRestaurants(restaurants) {
+    putRestaurants(restaurants, forceUpdate = false) {
 
         if (!restaurants.push) restaurants = [restaurants];
 
@@ -24,7 +24,9 @@ const dbPromise = {
 
                 return store.get(networkRestaurant.id).then(idbRestaurant => {
 
-                    if (!idbRestaurant || networkRestaurant.updatedAt > idbRestaurant.updatedAt) {
+                    if(forceUpdate) return store.put(networkRestaurant)
+                    
+                    if (!idbRestaurant || new Date(networkRestaurant.updatedAt) > new Date(idbRestaurant.updatedAt)) {
 
                         return store.put(networkRestaurant);
 
