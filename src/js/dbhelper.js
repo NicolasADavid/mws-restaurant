@@ -5,15 +5,6 @@ import dbPromise from './dbpromise';
  */
 export default class DBHelper {
 
-  /**
-   * Database URL.
-   * Change this to restaurants.json file location on your server.
-   */
-  static get DATABASE_URL() {
-    const port = 8000 // Change this to your server port
-    return `http://localhost:${port}/data/restaurants.json`;
-  }
-
   static get API_URL(){
     const port = 1337
     return `http://localhost:${port}`
@@ -233,7 +224,6 @@ export default class DBHelper {
       if(restaurant.photograph){
         return (`/images/${restaurant.photograph}`);
       }
-
       return
     })
     .catch((err)=>{
