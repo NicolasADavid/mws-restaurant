@@ -29,13 +29,6 @@ export default class DBHelper {
 
       if(response.status == 200){
 
-        // console.log("Success network call");
-
-        // response.json().then(restaurants => {
-        //   dbPromise.putRestaurants(restaurants);
-        //   return restaurants;
-        // })
-
         return response.json();
 
       } else {
@@ -237,7 +230,11 @@ export default class DBHelper {
 
     return DBHelper.fetchRestaurantById(restaurant.id)
     .then((restaurant)=>{
-      return (`/images/${restaurant.photograph}`);
+      if(restaurant.photograph){
+        return (`/images/${restaurant.photograph}`);
+      }
+
+      return
     })
     .catch((err)=>{
       console.log("imageUrlForRestaurant", err);

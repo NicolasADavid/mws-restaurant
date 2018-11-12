@@ -173,12 +173,18 @@ const createRestaurantHTML = async (restaurant) => {
   image.className = 'restaurant-img';
 
   const imageURLbase = await DBHelper.imageUrlForRestaurant(restaurant);
-  
-  const imgurl1x = imageURLbase + "-800_1x.jpg";
-  const imgurl2x = imageURLbase + "-1600_2x.jpg";
 
-  image.src = imgurl1x;
-  image.srcset = `${imgurl1x} 1x, ${imgurl2x} 2x`;
+  console.log(imageURLbase);
+  if(imageURLbase == undefined){
+    image.src = "images/na.jpg"
+  } else {
+    const imgurl1x = imageURLbase + "-800_1x.jpg";
+    const imgurl2x = imageURLbase + "-1600_2x.jpg";
+
+    image.src = imgurl1x;
+    image.srcset = `${imgurl1x} 1x, ${imgurl2x} 2x`;
+  }
+  
   image.alt = restaurant.name + " restaurant image";
 
   // image.onerror = "na.jpg";
