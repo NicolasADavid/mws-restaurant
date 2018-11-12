@@ -284,6 +284,17 @@ button.fav:focus {
   background-color: steelblue;
 }
 
+/* ====================== Submit Review Form  ====================== */
+
+.review {
+  width: 80%;
+  margin: auto;
+}
+
+.review textarea {
+  width: 80%;
+}
+
 /* ====================== Media Queries  ====================== */
 
 /* Between 0 and 775 */

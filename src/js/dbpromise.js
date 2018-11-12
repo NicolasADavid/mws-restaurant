@@ -14,6 +14,8 @@ const dbPromise = {
 
     putRestaurants(restaurants, forceUpdate = false) {
 
+        // console.log("put restaurants: ", restaurants, forceUpdate);
+
         if (!restaurants.push) restaurants = [restaurants];
 
         return this.db.then(db => {
@@ -45,6 +47,9 @@ const dbPromise = {
     },
 
     putReviews(reviews){
+
+        // console.log("put reviews: ", reviews);
+
         if(!reviews.push) reviews = [reviews]; //Convert to iterable object if not iterable
 
         return this.db.then(db => {
@@ -62,6 +67,9 @@ const dbPromise = {
     },
 
     getReviews(restaurantId){
+
+        // console.log("get reviews: ", restaurantId);
+
         return this.db.then(db => {
             const storeIndex = db.transaction('reviews').objectStore('reviews')
                 .index('restaurand_id');
@@ -71,6 +79,8 @@ const dbPromise = {
     },
 
     getRestaurants(id = undefined){
+
+        // console.log("get restaurants: ", id);
 
         return this.db.then(db => {
 
