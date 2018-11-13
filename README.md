@@ -72,3 +72,14 @@ Meet the new performance requirements: In addition to adding new features, the p
 Progressive Web App score should be at 90 or better.
 Performance score should be at 90 or better.
 Accessibility score should be at 90 or better.
+
+## Props
+
+Props to this guy https://www.linkedin.com/in/alexandroperez
+For making some great supplemental content to the projects at https://alexandroperez.github.io/mws-walkthrough/?3.5.the-ultimate-challenge\
+
+and to Doug Brown for making encouraging and illuminating project walkthrough videos.
+
+This tutorial guided my learning of background sync: https://developers.google.com/web/updates/2015/12/background-
+
+This tutorial helped me get the projects Lighthouse scores above 90 in the PWA category: https://developers.google.com/web/fundamentals/web-app-manifest/
