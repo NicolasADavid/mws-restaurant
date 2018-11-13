@@ -218,9 +218,9 @@ const createRestaurantHTML = async (restaurant) => {
   const more = document.createElement('a');
   more.tabIndex = 0;
   more.innerHTML = 'View Details';
+  more.className = "navigateLink";
   // Url for restaraunt details
   more.href = DBHelper.urlForRestaurant(restaurant);
-  more.aria-
   li.append(more)
 
   return li
