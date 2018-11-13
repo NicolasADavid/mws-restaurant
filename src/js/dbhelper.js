@@ -59,7 +59,7 @@ export default class DBHelper {
       
       if(!response.ok) return Promise.reject("No fetch!!");
 
-      console.log(response);
+      // console.log(response);
 
       return response.json();
 
@@ -199,7 +199,9 @@ export default class DBHelper {
       return reviews;
     }).catch(error => {
       //Get reviews from idb
+      console.log("Attempt to get reviews from IDB");
       console.log(error);
+
       return dbPromise.getReviews(restaurantId).then(idbReviews => {
         if(idbReviews.length < 1) return null;
         return idbReviews;
@@ -244,6 +246,87 @@ export default class DBHelper {
       })
       marker.addTo(map);
     return marker;
+  }
+
+  static updateCachedRestaurantReview(review){
+
+  }
+
+  static queueReview(review){
+    console.log("Queuing review");
+    return dbPromise.queueReview(review)
+    .catch((err)=>{
+      console.log("Error queuing review: ", err);
+    })
+  }
+
+  static clearQueuedReviews(){
+    console.log("Clearing outbox");
+
+    return dbPromise.clearQueuedReviews()
+    .catch((error) => {
+      console.log("Error clearing queued reviews: ", error);
+    })
+  }
+
+  static postReviews(){
+    console.log("Posting reviews");
+
+    return dbPromise.getQueuedReviews().then((queuedReviews) => {
+      console.log("Queued reviews: ", queuedReviews);
+
+      let promises = []
+
+      queuedReviews.forEach((queuedReview)=> {
+        promises.push(DBHelper.postReview(queuedReview))
+      });
+
+      return Promise.all(promises);
+    }).then((values)=>{
+      console.log("Values: ", values);
+
+      return dbPromise.clearQueuedReviews()
+    })
+  }
+
+  static postReview(review){
+
+    console.log("Actually post a review: ", review);
+
+    const url = `${DBHelper.API_URL}/reviews/`;
+    const OPTIONS = {
+      method: 'POST',
+      // mode: 'cors',
+      // cache: 'no-cache',
+      // headers: {
+      //   "Content-Type": "application/json: charset=utf-8",
+      // },
+      // redirect: "follow",
+      // referrer: "no-referrer",
+      body: JSON.stringify(review),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    return fetch(url, OPTIONS).then(response => {
+
+      if(!response.ok) return Promise.reject("Post failed!!");
+
+      return response.json();
+
+    }).then(newReview => {
+
+      console.log("newReview: ", newReview);
+
+      // save new review in idb
+      dbPromise.putReviews(newReview);
+
+    })
+    .catch((err) => {
+      console.log("Error posting review: ",err);
+      throw err;
+    });
   }
 
 }

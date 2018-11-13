@@ -1,7 +1,7 @@
 import regeneratorRuntime from "regenerator-runtime";
 import DBHelper from './dbhelper';
 import favoriteButton from './favorite-button';
-// import './register.js';
+import './register.js';
 
 let restaurants,
   neighborhoods,
@@ -174,7 +174,7 @@ const createRestaurantHTML = async (restaurant) => {
 
   const imageURLbase = await DBHelper.imageUrlForRestaurant(restaurant);
 
-  console.log(imageURLbase);
+  // console.log(imageURLbase);
   if(imageURLbase == undefined){
     image.src = "images/na.jpg"
   } else {

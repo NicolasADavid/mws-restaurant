@@ -1,8 +1,8 @@
 import regeneratorRuntime from "regenerator-runtime";
 import DBHelper from './dbhelper';
 import favoriteButton from './favorite-button';
-// import './register.js';
 import review from './review';
+import './register.js';
 
 let restaurant;
 var newMap;
@@ -56,7 +56,7 @@ const fetchRestaurantFromURL = (callback) => {
   }
   const id = getParameterByName('id');
   if (!id) { // no id found in URL
-    error = 'No restaurant id in URL'
+    let error = 'No restaurant id in URL'
     callback(error, null);
   } else {
     DBHelper.fetchRestaurantById(id)
@@ -137,6 +137,8 @@ const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hour
  * Create all reviews HTML and add them to the webpage.
  */
 const fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+
+  console.log("Filling reviews: ", reviews);
 
   // Existing Reviews
   const container = document.getElementById('reviews-container');
