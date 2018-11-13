@@ -26,7 +26,7 @@
 
       <h1 class="text-centered" >
 
-        <a tabindex="1" href="/">Restaurant Reviews</a>
+        <a tabindex="0" href="/">Restaurant Reviews</a>
 
       </h1>
 
@@ -38,7 +38,7 @@
 
     <!-- Map -->
     <section id="map-container">
-      <div id="map"></div>
+      <div id="map" aria-role="application" aria-label="map of restaurant locations"></div>
     </section>
 
     <!-- Filters -->
@@ -50,7 +50,7 @@
 
         <!-- Neighborhood filter -->
         <select 
-          tabindex="1"
+          tabindex="0"
           id="neighborhoods-select"
           name="neighborhoods"
           onchange="updateRestaurants()"
@@ -60,7 +60,7 @@
 
         <!-- Cuisine type filter -->
         <select
-          tabindex="1"
+          tabindex="0"
           id="cuisines-select"
           name="cuisines"
           onchange="updateRestaurants()"
@@ -89,7 +89,7 @@
   <!-- Main Script -->
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
 
-  <footer tabindex="3" id="footer">
+  <footer tabindex="0" id="footer">
     Copyright (c) 2017 <strong>Restaurant Reviews</strong> All Rights Reserved.
   </footer>
 

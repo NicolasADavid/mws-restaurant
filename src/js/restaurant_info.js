@@ -120,13 +120,13 @@ const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hour
     const row = document.createElement('tr');
 
     const day = document.createElement('td');
-    day.tabIndex = 1;
+    day.tabIndex = 0;
     day.innerHTML = key;
     row.appendChild(day);
 
     const time = document.createElement('td');
     time.innerHTML = operatingHours[key];
-    time.tabIndex = 1;
+    time.tabIndex = 0;
     row.appendChild(time);
 
     hours.appendChild(row);
@@ -144,14 +144,14 @@ const fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
-  title.tabIndex = 2;
+  title.tabIndex = 0;
   container.appendChild(title);
 
   // If no reviews
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';
-    noReviews.tabIndex = 2;
+    noReviews.tabIndex = 0;
     container.appendChild(noReviews);
   } else {
     const ul = document.getElementById('reviews-list');
@@ -182,24 +182,24 @@ const createReviewHTML = (review) => {
   const li = document.createElement('li');
   const nameStrong = document.createElement('strong')
   const name = document.createElement('p');
-  name.tabIndex = 2;
+  name.tabIndex = 0;
   name.innerHTML = review.name;
   nameStrong.appendChild(name)
   li.appendChild(nameStrong);
 
   const date = document.createElement('p');
-  date.tabIndex = 2;
+  date.tabIndex = 0;
   date.innerHTML = new Date(review.createdAt).toLocaleDateString();
   li.appendChild(date);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
-  rating.tabIndex = 2;
+  rating.tabIndex = 0;
   li.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
-  comments.tabIndex = 2;
+  comments.tabIndex = 0;
   li.appendChild(comments);
 
   return li;

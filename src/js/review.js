@@ -94,44 +94,43 @@ function handleSubmit(e) {
   // })
   // .catch((error) => {
   //   console.log("Couldn't post review: ", error);
-    console.log("Queuing.. ");
-
-    // Queue review
-    DBHelper.queueReview(review).then((something)=>{
-
-      console.log("Review has been queued: ", something);
-
-      console.log("Registering outbox for a sync event");
-
-      if ("serviceWorker" in navigator) {
-
-        navigator.serviceWorker.ready.then(reg => {
-
-          // if(!navigator.serviceWorker.controller) {
-          //   return;
-          // }
-
-          return reg.sync.register('outbox').then((something) => {
-            console.log("Something after registering outbox: ", something);
-            return something;
-          })
-          .catch((error) => {
-            console.log("Error registering for sync: ", error);
-          })
-
-        })
-        .catch(err => {
-            console.log("Register for sync error: ", err);
-        })
-
-      }
-
-
-    })
-    .catch((error)=>{
-      console.log("Error queuing review: ", error);
-    })
+  //   // Attempt to queue
   // })
+  
+  console.log("Queuing.. ");
+
+  // Queue review
+  DBHelper.queueReview(review).then((something)=>{
+
+    console.log("Review has been queued: ", something);
+
+    console.log("Registering outbox for a sync event");
+
+    if ("serviceWorker" in navigator) {
+
+      navigator.serviceWorker.ready.then(reg => {
+
+        return reg.sync.register('outbox').then((something) => {
+          console.log("Something after registering outbox: ", something);
+          return something;
+        })
+        .catch((error) => {
+          console.log("Error registering for sync: ", error);
+        })
+
+      })
+      .catch(err => {
+          console.log("Register for sync error: ", err);
+      })
+
+    }
+
+
+  })
+  .catch((error)=>{
+    console.log("Error queuing review: ", error);
+  })
+
 
   // post new review on page
   console.log("Adding review to page");
@@ -141,32 +140,6 @@ function handleSubmit(e) {
 
   // clear form
   clearForm();
-
-  // TODO: use Background Sync to sync data with API server
-  // return fetch(url, POST).then(response => {
-
-  //   if (!response.ok){
-  //     console.log("Review wasn't posted yet");
-  //     return Promise.reject("We couldn't post review to server.");
-  //   }
-
-  //   return response.json();
-  // }).then(newNetworkReview => {
-
-  //   // save new review on idb
-  //   dbPromise.putReviews(newNetworkReview);
-
-  //   // post new review on page
-  //   const reviewList = document.getElementById('reviews-list');
-  //   const review = createReviewHTML(newNetworkReview);
-  //   reviewList.appendChild(review);
-
-  //   // clear form
-  //   clearForm();
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
 
 }
 
@@ -189,6 +162,7 @@ export default function review(restaurantId) {
   name.setAttribute('type', 'text');
   name.setAttribute('aria-label', 'Name');
   name.setAttribute('placeholder', 'Enter Your Name');
+  name.tabIndex = 0;
   p.appendChild(name);
   form.appendChild(p);
 
@@ -223,6 +197,7 @@ export default function review(restaurantId) {
   textarea.setAttribute('aria-label', 'comments');
   textarea.setAttribute('placeholder', 'Enter your review');
   textarea.setAttribute('rows', '10');
+  textarea.tabIndex = 0;
   p.appendChild(textarea);
   form.appendChild(p);
 
@@ -234,6 +209,7 @@ export default function review(restaurantId) {
   addButton.setAttribute('id', 'reviewSubmit')
   addButton.classList.add('add-review');
   addButton.innerHTML = "Submit";
+  addButton.tabIndex = 0;
   p.appendChild(addButton);
   form.appendChild(p);
   form.onsubmit = handleSubmit;
