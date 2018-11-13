@@ -1,7 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-
 *:focus{
   outline: dashed;
   outline-color: red;
@@ -46,7 +45,9 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   text-transform: uppercase;
 }
+
 /* ====================== Navigation ====================== */
+
 nav {
   background-color: #252831;
 }
@@ -99,13 +100,16 @@ nav h1 a {
     color: #01447e;
     text-decoration: underline;
 }
+
 /* ====================== Map ====================== */
+
 #map {
   width: 100%;
   background-color: #ccc;
 }
 
 /* ====================== Restaurant Filtering ====================== */
+
 #filter-container {
   background-color: #252831;
 }
@@ -130,6 +134,7 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Listing ====================== */
+
 #restaurants-list {
   background-color: #f3f3f3;
   list-style: outside none none;
@@ -172,6 +177,7 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Details ====================== */
+
 .inside header {
   width: 100%;
   z-index: 1000;

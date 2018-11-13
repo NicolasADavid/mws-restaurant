@@ -248,10 +248,6 @@ export default class DBHelper {
     return marker;
   }
 
-  static updateCachedRestaurantReview(review){
-
-  }
-
   static queueReview(review){
     console.log("Queuing review");
     return dbPromise.queueReview(review)
@@ -296,13 +292,6 @@ export default class DBHelper {
     const url = `${DBHelper.API_URL}/reviews/`;
     const OPTIONS = {
       method: 'POST',
-      // mode: 'cors',
-      // cache: 'no-cache',
-      // headers: {
-      //   "Content-Type": "application/json: charset=utf-8",
-      // },
-      // redirect: "follow",
-      // referrer: "no-referrer",
       body: JSON.stringify(review),
       headers: {
         'Content-Type': 'application/json'
