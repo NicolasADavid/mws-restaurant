@@ -2,7 +2,7 @@ if ("serviceWorker" in navigator) {
 
     navigator.serviceWorker.register("./sw.js").then(reg => {
 
-        console.log("SW register success");
+        // console.log("SW register success");
 
         // if(!navigator.serviceWorker.controller) {
         //     return;

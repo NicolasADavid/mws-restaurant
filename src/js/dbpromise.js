@@ -68,7 +68,7 @@ const dbPromise = {
     
     putReviews(reviews){
 
-        console.log("put reviews in IDB: ", reviews);
+        // console.log("put reviews in IDB: ", reviews);
 
         if(!reviews.push) reviews = [reviews]; //Convert to iterable object if not iterable
 

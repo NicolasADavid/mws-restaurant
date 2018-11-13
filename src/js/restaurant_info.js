@@ -138,7 +138,7 @@ const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hour
  */
 const fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 
-  console.log("Filling reviews: ", reviews);
+  // console.log("Filling reviews: ", reviews);
 
   // Existing Reviews
   const container = document.getElementById('reviews-container');

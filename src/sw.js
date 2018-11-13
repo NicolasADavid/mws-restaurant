@@ -3,7 +3,7 @@ import DBHelper from "./js/dbhelper";
 
 self.addEventListener("install", event => {
 
-    console.log("Installing");
+    // console.log("Installing");
 
     event.waitUntil(
         caches.open(cacheVer).then(cache => {
@@ -22,7 +22,7 @@ self.addEventListener("install", event => {
 
 self.addEventListener('fetch', function (event) {
 
-    console.log("Fetch happening", event);
+    // console.log("Fetch happening", event);
 
     let cacheRequest = event.request;
 
